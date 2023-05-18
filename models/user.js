@@ -13,10 +13,8 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    category: {
-      type: String,
-      enum: ["sell", "lost/found", "in good hands"],
-    },
+
+    avatarURL: { type: String, required: true },
     token: String,
     name: String,
     birthday: {
@@ -40,7 +38,7 @@ const loginSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  category: Joi.string(),
+  // category: Joi.string(),
   name: Joi.string(),
   birthday: Joi.string(),
   phone: Joi.string(),

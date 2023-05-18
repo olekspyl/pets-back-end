@@ -15,19 +15,10 @@ const petSchema = new Schema({
     type: String,
     required: [true, "Set breed"],
   },
-  place: {
-    type: String,
-    required: [true, "Set place"],
-  },
-  sex: {
-    type: String,
-    required: [true, "Set the sex"],
-  },
+  imgURL: { type: String, required: true },
+
   comments: String,
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
+
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",
@@ -39,18 +30,12 @@ const addNewPetSchema = Joi.object({
   name: Joi.string().required(),
   dateOfBirth: Joi.string().required(),
   breed: Joi.string().required(),
-  place: Joi.string().required(),
-  sex: Joi.string().required(),
-  comments: Joi.string(),
-});
 
-const updatePetToFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
+  comments: Joi.string(),
 });
 
 const schemas = {
   addNewPetSchema,
-  updatePetToFavoriteSchema,
 };
 
 petSchema.post("save", handleMongooseError);
