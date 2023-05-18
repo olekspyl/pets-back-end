@@ -37,6 +37,6 @@ router.get("/:noticeId", ctrl.getNoticeById);
 // router.get("/", ctrl.getAllNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
-// router.delete("/:noticeId", ctrl.deleteNotice);
+router.delete("/:noticeId", ctrl.remoweNoticeById);
 
 module.exports = router;
