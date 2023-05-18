@@ -5,7 +5,7 @@ const router = express.Router();
 // const ctrl = require("../../controllers/users");
 
 // створити ендпоінт для пошуку оголошеннь по заголовку
-router.get("/:name", ctrl.getNoticeByName);
+router.get("/", ctrl.getNoticeByName);
 
 // створити ендпоінт для отримання оголошень по категоріям
 router.get("/:category", ctrl.getNoticeByCategory);
