@@ -2,7 +2,7 @@ const { Notice } = require("../../models/notice");
 
 const addNoticeInCategory = async (req, res) => {
   console.log("it is addNoticeInCategory");
-  const { category } = req.params;
+  const { category } = req.query;
   // const { _id: owner } = req.user;
 
   const newNotice = {
