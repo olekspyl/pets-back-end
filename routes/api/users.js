@@ -7,6 +7,7 @@ const checkAuth = require("../../middlewars/checkAuth");
 
 router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
 router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
+
 router.post("/logout", checkAuth, ctrl.logout);
 // router.patch(
 //   "/update",
@@ -15,5 +16,6 @@ router.post("/logout", checkAuth, ctrl.logout);
 // );
 // router.get("/current", ctrl.getCurrentUser);
 // router.get("/current/pets", ctrl.getCurrentUserPets);
+
 
 module.exports = router;
