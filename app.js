@@ -4,7 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 
 // const petsRouter = require("./routes/api/pets");
-// const authRouter = require("./routes/api/users");
+const authRouter = require("./routes/api/users");
 const noticesRouter = require("./routes/api/notices");
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // app.use("/api/pets", petsRouter);
-// app.use("/api/users", authRouter);
+app.use("/api/users", authRouter);
 app.use("/api/notices", noticesRouter);
 
 app.use((req, res) => {
