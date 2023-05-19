@@ -34,7 +34,7 @@ const noticeSchema = new Schema({
   favorite: {
     type: [Schema.Types.ObjectId],
     ref: "user",
-    default: false,
+    default: [],
     required: true,
   },
   owner: {
@@ -46,6 +46,7 @@ const noticeSchema = new Schema({
 });
 
 const addNewNoticeSchema = Joi.object({
+  title: Joi.string().required(),
   name: Joi.string().required(),
   dateOfBirth: Joi.string().required(),
   breed: Joi.string().required(),
