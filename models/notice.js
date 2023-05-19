@@ -55,7 +55,7 @@ const addNewNoticeSchema = Joi.object({
 });
 
 const updateNoticeToFavoriteSchema = Joi.object({
-  favorite: [Joi.string].required(),
+  favorite: Joi.string().required(),
 });
 
 const schemas = {
@@ -63,7 +63,7 @@ const schemas = {
   updateNoticeToFavoriteSchema,
 };
 
-petSchema.post("save", handleMongooseError);
+noticeSchema.post("save", handleMongooseError);
 
 const Notice = model("notice", noticeSchema);
 
