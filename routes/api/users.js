@@ -12,7 +12,7 @@ router.patch(
   ctrl.updateUserData
 );
 router.get("/current", ctrl.getCurrentUser);
-router.get("/current/pets", ctrl.getCurrentUserPets);
+// router.get("/current/pets", ctrl.getCurrentUserPets);
 router.post("/logout", ctrl.logout);
 
 module.exports = router;
