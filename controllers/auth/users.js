@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
 const { User } = require("../../models/user");
+const { Pet } = require("../../models/pet");
 const { ctrlWrapper, HttpError } = require("../../utils");
 const { use } = require("../../app");
 
@@ -68,8 +69,20 @@ const logout = async (req, res) => {
   });
 };
 
+const getCurrentUser = async (req, res) => {
+  const id = req.userId;
+  const userInfo = await User.findById(
+    id,
+    "name email birthday phone city avatarURL"
+  );
+
+  const petsInfo = await Pet.find({ owner: id });
+  res.status(200).json({ userInfo, petsInfo });
+};
+
 module.exports = {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
   logout: ctrlWrapper(logout),
+  getCurrentUser: ctrlWrapper(getCurrentUser),
 };
