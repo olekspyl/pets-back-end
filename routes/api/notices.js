@@ -1,6 +1,6 @@
 const express = require("express");
 const { validateBody } = require("../../middlewars");
-const { schemas } = require("../../models/pet");
+const { schemas } = require("../../models/notice");
 const router = express.Router();
 const ctrl = require("../../controllers/notices");
 
@@ -27,11 +27,11 @@ router.get("/:noticeId", ctrl.getNoticeById);
 // router.delete("/favourite/:noticeId", ctrl.deleteAmongFav);
 
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
-// router.post(
-//   "/category",
-//   validateBody(schemas.addNewPetSchema),
-//   ctrl.addNoticeinCategory
-// );
+router.post(
+  "/category",
+  validateBody(schemas.addNewNoticeSchema),
+  ctrl.addNoticeInCategory
+);
 
 // створити ендпоінт для отримання оголошень авторизованого кристувача створених цим же користувачем
 // router.get("/", ctrl.getAllNotices);
