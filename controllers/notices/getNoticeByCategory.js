@@ -8,13 +8,11 @@ const getNoticeByCategory = async (req, res) => {
 
   console.log("it is getNoticeByCategory controller");
   console.log(category);
-  const result = await Notice.find(
-    { category, title },
-    {
-      skip,
-      limit,
-    }
-  );
+  const query = title ? { category, title } : { category };
+  const result = await Notice.find(query, {
+    skip,
+    limit,
+  });
   console.log(result);
 
   res.status(200).json(result);
