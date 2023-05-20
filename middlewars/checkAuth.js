@@ -3,21 +3,41 @@ const { HttpError } = require("../utils");
 
 const checkAuth = async (req, res, next) => {
   const headerAuth = req.headers.authorization || "";
+
   if (!headerAuth) {
-    throw HttpError(401, "Not avtorization");
+    return next(HttpError(401, "Not authorized"));
   }
+
   const [bearer, token] = await headerAuth.split(" ", 2);
-  if (bearer !== "Bearer") {
-    throw HttpError(401, "Not avtorization");
+
+  if (bearer !== "Bearer" || !token) {
+    return next(HttpError(401, "Not authorized"));
   }
+
   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
-      throw HttpError(401, "Not avrorization");
+      return next(HttpError(401, "Not authorized"));
     }
 
     req.userId = decoded;
+
     next();
   });
+
+  // try {
+  //   const { id } = jwt.verify(token, process.env.SECRET_KEY);
+  //   console.log("5");
+
+  //   console.log("6");
+
+  //   req.userId = { id };
+  //   console.log("7");
+
+  //   next();
+  // } catch (error) {
+  //   console.log("er1");
+  //   next(HttpError(401, "Not authorized"));
+  // }
 };
 
 module.exports = checkAuth;

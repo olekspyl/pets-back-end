@@ -2,7 +2,8 @@ const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
 const remoweNoticeById = async (req, res) => {
-  const { _id: owner } = req.user;
+  // const { _id: owner } = req.user;
+  const { id: owner } = req.userId;
   const { noticeId } = req.params;
 
   const result = await Notice.findOneAndDelete({

@@ -14,14 +14,7 @@ cloudinary.config({
   api_secret: CLOUDINARY_SECRET,
 });
 
-// const storage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: "avatars",
-//     format: async (req, file) => "png", // supports promises as well
-//     public_id: (req, file) => "computed-filename-using-request",
-//   },
-// });
+
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,

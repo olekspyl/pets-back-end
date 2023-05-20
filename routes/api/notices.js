@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateBody, checkAuth } = require("../../middlewars");
+const { validateBody, checkAuth, uploadCloud } = require("../../middlewars");
 const { schemas } = require("../../models/notice");
 const router = express.Router();
 const ctrl = require("../../controllers/notices");
@@ -31,6 +31,8 @@ router.post(
   "/category",
   checkAuth,
   validateBody(schemas.addNewNoticeSchema),
+  uploadCloud.single("image"),
+
   ctrl.addNoticeInCategory
 );
 
@@ -38,6 +40,6 @@ router.post(
 // router.get("/", ctrl.getAllNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
-router.delete("/:noticeId", ctrl.remoweNoticeById);
+router.delete("/:noticeId", checkAuth, ctrl.remoweNoticeById);
 
 module.exports = router;

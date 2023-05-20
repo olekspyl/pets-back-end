@@ -1,8 +1,14 @@
 const { Pet } = require("../../models/pet");
+const { HttpError } = require("../../utils");
 
 const petRegister = async (req, res) => {
   console.log(" it is petRegister controller");
   const { id } = req.userId;
+
+  const pet = await Pet.findOne({ owner: id, name: req.body.name });
+  if (pet) {
+    throw HttpError(401, "Pet found");
+  }
 
   let newPet = {
     ...req.body,
