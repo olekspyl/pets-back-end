@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateBody } = require("../../middlewars");
+const { validateBody, checkAuth } = require("../../middlewars");
 const { schemas } = require("../../models/notice");
 const router = express.Router();
 const ctrl = require("../../controllers/notices");
@@ -29,6 +29,7 @@ router.get("/:noticeId", ctrl.getNoticeById);
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
 router.post(
   "/category",
+  checkAuth,
   validateBody(schemas.addNewNoticeSchema),
   ctrl.addNoticeInCategory
 );
