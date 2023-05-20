@@ -40,6 +40,6 @@ router.post(
 // router.get("/", ctrl.getAllNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
-router.delete("/:noticeId", ctrl.remoweNoticeById);
+router.delete("/:noticeId", checkAuth, ctrl.remoweNoticeById);
 
 module.exports = router;

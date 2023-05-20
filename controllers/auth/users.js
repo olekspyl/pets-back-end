@@ -4,7 +4,7 @@ const gravatar = require("gravatar");
 const { User } = require("../../models/user");
 const { Pet } = require("../../models/pet");
 const { ctrlWrapper, HttpError } = require("../../utils");
-const { use } = require("../../app");
+// const { use } = require("../../app");
 
 const { SECRET_KEY } = process.env;
 
@@ -36,7 +36,7 @@ const register = async (req, res) => {
     { new: true }
   );
 
-  res.json(createUser);
+  res.status(201).json(createUser);
 };
 
 const login = async (req, res) => {
