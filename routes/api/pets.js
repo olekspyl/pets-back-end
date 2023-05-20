@@ -1,14 +1,12 @@
-// const express = require("express");
-// const { schemas } = require("../../models/user");
-// const { validateBody} = require("../../middlewars");
-// const router = express.Router();
+const express = require("express");
+const { schemas } = require("../../models/user");
+const { validateBody } = require("../../middlewars");
+const router = express.Router();
+const ctrl = require("../../controllers/pets");
+const checkAuth = require("../../middlewars/checkAuth");
+const uploadCloud = require("../../middlewars/uploadCloud");
 
-// router.post(
-//   "/",
-//   authMiddleware,
-//   uploadCloud.single("image"),
-//   PetController.petRegister
-// );
+router.post("/", checkAuth, uploadCloud.single("image"), ctrl.petRegister);
 
 // router.delete(
 //   "/:imageId",
@@ -16,3 +14,5 @@
 //   uploadCloud.single("image"),
 //   PetController.petRegister
 // );
+
+module.exports = router;
