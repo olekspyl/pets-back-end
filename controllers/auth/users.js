@@ -77,6 +77,7 @@ const getCurrentUser = async (req, res) => {
   );
 
   const petsInfo = await Pet.find({ owner: id });
+
   res.status(200).json({ userInfo, petsInfo });
 };
 

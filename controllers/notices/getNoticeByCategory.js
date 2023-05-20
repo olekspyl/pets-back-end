@@ -1,4 +1,5 @@
 const { Notice } = require("../../models/notice");
+const { HttpError } = require("../../utils");
 
 const getNoticeByCategory = async (req, res) => {
   console.log("it is getNoticeByCategory");
@@ -14,7 +15,9 @@ const getNoticeByCategory = async (req, res) => {
     skip,
     limit,
   });
-  console.log(result);
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
 
   res.status(200).json(result);
 };
