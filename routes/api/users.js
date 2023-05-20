@@ -14,7 +14,7 @@ router.post("/logout", checkAuth, ctrl.logout);
 //   validateBody(schemas.updateUserSchema),
 //   ctrl.updateUserData
 // );
-router.get("/current", ctrl.getCurrentUser);
+router.get("/current", checkAuth, ctrl.getCurrentUser);
 // router.get("/current/pets", ctrl.getCurrentUserPets);
 
 module.exports = router;
