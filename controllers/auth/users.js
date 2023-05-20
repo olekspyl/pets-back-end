@@ -70,7 +70,7 @@ const logout = async (req, res) => {
 };
 
 const getCurrentUser = async (req, res) => {
-  const id = req.userId;
+  const { id } = req.userId;
   const userInfo = await User.findById(
     id,
     "name email birthday phone city avatarURL"
