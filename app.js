@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require("./swagger/swagger.json");
 
 const petsRouter = require("./routes/api/pets");
 const authRouter = require("./routes/api/users");
@@ -18,6 +20,7 @@ app.use(express.json());
 app.use("/api/pets", petsRouter);
 app.use("/api/users", authRouter);
 app.use("/api/notices", noticesRouter);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use((req, res) => {
   return res.status(404).json({ message: "Not found" });

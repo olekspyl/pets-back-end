@@ -8,11 +8,4 @@ const uploadCloud = require("../../middlewars/uploadCloud");
 
 router.post("/", checkAuth, uploadCloud.single("image"), ctrl.petRegister);
 
-// router.delete(
-//   "/:imageId",
-//   authMiddleware,
-//   uploadCloud.single("image"),
-//   PetController.petRegister
-// );
-
 module.exports = router;
