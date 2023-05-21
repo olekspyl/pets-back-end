@@ -11,9 +11,9 @@ router.get("/", ctrl.getNoticeByName);
 router.get("/category/:type", ctrl.getNoticeByCategory);
 
 // створити ендпоінт для отримання одного оголошення
-router.get("/:noticeId", ctrl.getNoticeById);
+router.get("/notice/:noticeId", ctrl.getNoticeById);
 
-// створити ендпоінт для додавання оголошення до обраних
+// // створити ендпоінт для додавання оголошення до обраних
 router.patch(
   "/favourite/:noticeId",
   checkAuth,
@@ -22,7 +22,7 @@ router.patch(
 );
 
 // створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
-// router.get("/favourite", ctrl.findByNameAmongFav);
+router.get("/favourite", checkAuth, ctrl.findByNameAmongFav);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
 // router.delete("/favourite/:noticeId", ctrl.deleteAmongFav);
