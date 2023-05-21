@@ -203,14 +203,7 @@
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TitleNoticesRequest"
-              }
-            }
-          }
+          "required": false
         },
         "responses": {
           "200": {
@@ -249,14 +242,7 @@
         ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TitleNoticesRequest"
-              }
-            }
-          }
+          "required": false
         },
         "responses": {
           "200": {
@@ -270,7 +256,7 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "Not found"
           },
           "409": {
             "description": "Conflict"
@@ -295,14 +281,7 @@
         ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NoticeIdRequest"
-              }
-            }
-          }
+          "required": false
         },
         "responses": {
           "200": {
@@ -316,7 +295,231 @@
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/notices/favourite": {
+      "get": {
+        "tags": ["Notices"],
+        "description": "find by title notices among favourite",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavouriteResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/notices/category": {
+      "post": {
+        "tags": ["Notices"],
+        "description": "add notice in appropriate category",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddNoticeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeRequest"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/notices/favourite/:noticeId": {
+      "patch": {
+        "tags": ["Notices"],
+        "description": "add notice to favourite",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "noticeId",
+            "required": true,
+            "description": "id of notice"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddToFavouriteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddToFavouriteRequest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "You have already added this notice to your favorites"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/:noticeId": {
+      "delete": {
+        "tags": ["Notices"],
+        "description": "delete notice",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "noticeId",
+            "required": true,
+            "description": "id of notice"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/pets/": {
+      "post": {
+        "tags": ["Pets"],
+        "description": "add new pet",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPetRequest"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Pet found"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/pets/:petId": {
+      "delete": {
+        "tags": ["Pets"],
+        "description": "delete pet by id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "description": "id of pet"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
           },
           "409": {
             "description": "Conflict"
@@ -391,30 +594,72 @@
           }
         }
       },
-      "TitleNoticesRequest": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "exact point user is looking for",
-            "format": "Fluffy"
-          }
-        }
-      },
       "TitleNoticesResponse": {
         "type": "array",
         "properties": {
           "notices": {
-            "type": "object",
-            "description": "all suitable matches found"
+            "type": "object"
           }
         }
       },
-      "NoticeIdRequest": {
-        "type": "integer"
-      },
       "NoticeIdResponse": {
         "type": "object"
+      },
+      "FavouriteResponse": {
+        "type": "object"
+      },
+      "AddNoticeRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Kitty"
+          },
+          "name": {
+            "type": "string",
+            "example": "Cat"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "05.05.2015"
+          },
+          "place": {
+            "type": "string",
+            "example": "Lviv"
+          },
+          "breed": {
+            "type": "string",
+            "example": "uknown"
+          },
+          "sex": {
+            "type": "string",
+            "example": "girl"
+          },
+          "comments": {
+            "type": "string",
+            "example": "Maybe, it's your new friend?"
+          }
+        }
+      },
+      "AddToFavouriteRequest": {
+        "type": "object"
+      },
+      "AddPetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Cat"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "05.05.2015"
+          },
+          "breed": {
+            "type": "string",
+            "example": "uknown"
+          }
+        }
       }
     },
     "securitySchemes": {
