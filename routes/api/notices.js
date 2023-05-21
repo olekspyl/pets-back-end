@@ -13,7 +13,7 @@ router.get("/category/:type", ctrl.getNoticeByCategory);
 // створити ендпоінт для отримання одного оголошення
 router.get("/notice/:noticeId", ctrl.getNoticeById);
 
-// // створити ендпоінт для додавання оголошення до обраних
+// створити ендпоінт для додавання оголошення до обраних
 router.patch(
   "/favourite/:noticeId",
   checkAuth,
@@ -38,7 +38,7 @@ router.post(
 );
 
 // створити ендпоінт для отримання оголошень авторизованого кристувача створених цим же користувачем
-// router.get("/", ctrl.getAllNotices);
+router.get("/user", checkAuth, ctrl.getAllOwnerNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
 router.delete("/:noticeId", checkAuth, ctrl.remoweNoticeById);

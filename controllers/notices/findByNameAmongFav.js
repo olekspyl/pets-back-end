@@ -3,14 +3,26 @@ const { Notice } = require("../../models/notice");
 
 const findByNameAmongFav = async (req, res) => {
   const { id: owner } = req.userId;
-  //   const { noticeId } = req.params;
+
+  let { page = 1, limit = 12 } = req.query;
+
+  const parsedPage = parseInt(page);
+  const parsedLimit = parseInt(limit);
+  page = parsedPage >= 1 ? parsedPage : 1;
+  limit = parsedLimit > 1 && parsedLimit < 12 ? parsedLimit : 12;
+
+  const skip = (parseInt(page) - 1) * limit;
+
+  const totalNotices = await Notice.find({
+    favorite: owner,
+  }).count();
 
   const notices = await Notice.find(
     {
-      // _id: noticeId,
       favorite: owner,
     },
-    "-__v"
+    "-__v",
+    { skip, limit }
   );
 
   //   if (!notices.length) {
@@ -20,7 +32,13 @@ const findByNameAmongFav = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    notices,
+    data: {
+      totalNotices,
+      page,
+      totalPages: Math.ceil(totalNotices / limit),
+      currentOnPage: notices.length,
+      notices,
+    },
   });
 };
 
