@@ -14,11 +14,12 @@ router.get("/category/:type", ctrl.getNoticeByCategory);
 router.get("/:noticeId", ctrl.getNoticeById);
 
 // створити ендпоінт для додавання оголошення до обраних
-// router.patch(
-//   "/favourite/:noticeId",
-//   validateBody(schemas.updatePetToFavoriteSchema),
-//   ctrl.addToFavourite
-// );
+router.patch(
+  "/favourite/:noticeId",
+  checkAuth,
+  //   validateBody(schemas.updatePetToFavoriteSchema),
+  ctrl.addToFavourite
+);
 
 // створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
 // router.get("/favourite", ctrl.findByNameAmongFav);
