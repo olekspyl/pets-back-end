@@ -5,6 +5,7 @@ const getNoticeById = require("./getNoticeById");
 const getNoticeByName = require("./getNoticeByName");
 const addToFavourite = require("./addToFavourite");
 const findByNameAmongFav = require("./findByNameAmongFav");
+const deleteAmongFav = require("./deleteAmongFav");
 
 const { ctrlWrapper } = require("../../utils");
 
@@ -16,4 +17,5 @@ module.exports = {
   getNoticeByName: ctrlWrapper(getNoticeByName),
   addToFavourite: ctrlWrapper(addToFavourite),
   findByNameAmongFav: ctrlWrapper(findByNameAmongFav),
+  deleteAmongFav: ctrlWrapper(deleteAmongFav),
 };

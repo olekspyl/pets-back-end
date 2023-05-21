@@ -25,7 +25,7 @@ router.patch(
 router.get("/favourite", checkAuth, ctrl.findByNameAmongFav);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
-// router.delete("/favourite/:noticeId", ctrl.deleteAmongFav);
+router.delete("/favourite/:noticeId", checkAuth, ctrl.deleteAmongFav);
 
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
 router.post(
