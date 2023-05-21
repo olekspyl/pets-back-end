@@ -2,10 +2,10 @@ const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
 const addToFavourite = async (req, res) => {
-  const { id: owner } = req.userId;
+  const { id: userId } = req.userId;
   const { noticeId } = req.params;
 
-  const notice = await Notice.findOne({ _id: noticeId, favorite: owner });
+  const notice = await Notice.findOne({ _id: noticeId, favorite: userId });
 
   if (notice) {
     throw HttpError(
@@ -18,7 +18,7 @@ const addToFavourite = async (req, res) => {
     {
       _id: noticeId,
     },
-    { $push: { favorite: owner } },
+    { $push: { favorite: userId } },
     { new: true }
   );
 
