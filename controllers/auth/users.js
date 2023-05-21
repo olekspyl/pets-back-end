@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
 const { User } = require("../../models/user");
-const { Pet } = require("../../models/pet");
+// const { Pet } = require("../../models/pet");
 const { ctrlWrapper, HttpError } = require("../../utils");
 // const { use } = require("../../app");
 
@@ -55,7 +55,6 @@ const login = async (req, res) => {
   const token = await jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
   await User.findByIdAndUpdate(user._id, { token });
   res.json({
-    token,
     user,
   });
 };
@@ -70,20 +69,13 @@ const logout = async (req, res) => {
 };
 
 const getCurrentUser = async (req, res) => {
-  const { id } = req.userId;
-  console.log("id", id);
-  const userInfo = await User.findById(
-    id,
+  const {id} = req.userId;
+  const user = await User.findById(id);
 
-    "name email birthday phone city avatarURL"
-  );
-  if (!userInfo) {
-    throw HttpError(404, "User not fund");
-  }
-
-  const petsInfo = await Pet.find({ owner: id });
-
-  res.status(200).json({ userInfo, petsInfo });
+  res.status(200).json({
+    user
+  })
+ 
 };
 
 module.exports = {
