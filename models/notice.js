@@ -11,6 +11,8 @@ const noticeSchema = new Schema(
     category: {
       type: String,
       enum: ["sell", "lost/found", "in good hands"],
+      required: true,
+      default: "sell",
     },
     imgURL: { type: String, required: true },
     name: { type: String },
