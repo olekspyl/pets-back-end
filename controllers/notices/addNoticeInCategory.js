@@ -2,7 +2,7 @@ const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
 const addNoticeInCategory = async (req, res) => {
-  console.log("it is addNoticeInCategory");
+
   const { category } = req.query;
   const { id: owner } = req.userId;
 

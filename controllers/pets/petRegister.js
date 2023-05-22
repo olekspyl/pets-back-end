@@ -2,7 +2,6 @@ const { Pet } = require("../../models/pet");
 const { HttpError } = require("../../utils");
 
 const petRegister = async (req, res) => {
-  console.log(" it is petRegister controller");
   const { id } = req.userId;
 
   const pet = await Pet.findOne({ owner: id, name: req.body.name });
@@ -24,8 +23,6 @@ const petRegister = async (req, res) => {
       imgURL: path,
     };
   }
-
-  console.log("new pet", newPet);
 
   const result = await Pet.create(newPet);
 

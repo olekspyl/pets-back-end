@@ -2,7 +2,7 @@ const express = require("express");
 const { schemas } = require("../../models/user");
 const { validateBody } = require("../../middlewars");
 const router = express.Router();
-const ctrl = require("../../controllers/auth/users");
+const ctrl = require("../../controllers/auth");
 const checkAuth = require("../../middlewars/checkAuth");
 
 router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
