@@ -23,21 +23,6 @@ const checkAuth = async (req, res, next) => {
 
     next();
   });
-
-  // try {
-  //   const { id } = jwt.verify(token, process.env.SECRET_KEY);
-  //   console.log("5");
-
-  //   console.log("6");
-
-  //   req.userId = { id };
-  //   console.log("7");
-
-  //   next();
-  // } catch (error) {
-  //   console.log("er1");
-  //   next(HttpError(401, "Not authorized"));
-  // }
 };
 
 module.exports = checkAuth;
