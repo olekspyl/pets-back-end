@@ -11,7 +11,10 @@ const getOwnerAllNotices = async (req, res) => {
     owner,
   }).count();
 
-  const notices = await Notice.find({ owner }, "-__v", { skip, limit });
+  const notices = await Notice.find({ owner }, "-__v", {
+    skip,
+    limit,
+  }).populate("owner", "name email phone city");
 
   res.json({
     status: "success",
