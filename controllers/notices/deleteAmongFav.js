@@ -7,7 +7,6 @@ const deleteAmongFav = async (req, res) => {
 
   const notice = await Notice.findOne({
     _id: noticeId,
-    // userId,
   });
 
   if (!notice || !notice.favorite.includes(userId)) {

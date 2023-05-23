@@ -7,15 +7,6 @@ const getAllOwnerNotices = async (req, res) => {
 
   const { page, limit, skip } = paginate(processedPage, processedLimit);
 
-  // let { page = 1, limit = 12 } = req.query;
-
-  // const parsedPage = parseInt(page);
-  // const parsedLimit = parseInt(limit);
-  // page = parsedPage >= 1 ? parsedPage : 1;
-  // limit = parsedLimit > 1 && parsedLimit < 12 ? parsedLimit : 12;
-
-  // const skip = (parseInt(page) - 1) * limit;
-
   const totalNotices = await Notice.find({
     owner,
   }).count();
