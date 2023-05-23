@@ -4,7 +4,10 @@ const { HttpError } = require("../../utils");
 const getNoticeById = async (req, res) => {
   const { noticeId } = req.params;
 
-  const notice = await Notice.findById({ _id: noticeId }, "-__v");
+  const notice = await Notice.findById({ _id: noticeId }, "-__v").populate(
+    "owner",
+    "name email phone city"
+  );
 
   if (!notice) {
     throw HttpError(404);

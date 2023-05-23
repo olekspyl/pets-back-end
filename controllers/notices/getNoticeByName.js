@@ -18,7 +18,10 @@ const getNoticeByName = async (req, res) => {
 
   const totalNotices = await Notice.find(query).count();
 
-  const notices = await Notice.find(query, "-__v", { skip, limit });
+  const notices = await Notice.find(query, "-__v", { skip, limit }).populate(
+    "owner",
+    "name email phone city"
+  );
 
   // if (!notices) {
   //   throw HttpError(404, "Not found");

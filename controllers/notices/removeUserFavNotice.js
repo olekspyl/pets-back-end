@@ -1,7 +1,7 @@
 const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
-const deleteUserFavNotice = async (req, res) => {
+const removeUserFavNotice = async (req, res) => {
   const { id: userId } = req.userId;
   const { noticeId } = req.params;
 
@@ -29,4 +29,4 @@ const deleteUserFavNotice = async (req, res) => {
   });
 };
 
-module.exports = deleteUserFavNotice;
+module.exports = removeUserFavNotice;
