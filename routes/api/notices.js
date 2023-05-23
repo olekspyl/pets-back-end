@@ -19,10 +19,10 @@ router.patch(
 );
 
 // створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
-router.get("/favourite", checkAuth, ctrl.findUserFavNotices);
+router.get("/favourite", checkAuth, ctrl.getUserFavNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
-router.delete("/favourite/:noticeId", checkAuth, ctrl.deleteUserFavNotice);
+router.delete("/favourite/:noticeId", checkAuth, ctrl.removeUserFavNotice);
 
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
 router.post(
@@ -35,7 +35,7 @@ router.post(
 );
 
 // створити ендпоінт для отримання оголошень авторизованого кристувача створених цим же користувачем
-router.get("/user", checkAuth, ctrl.getAllOwnerNotices);
+router.get("/user", checkAuth, ctrl.getOwnerAllNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
 router.delete("/:noticeId", checkAuth, ctrl.remoweNoticeById);

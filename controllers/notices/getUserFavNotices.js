@@ -1,17 +1,24 @@
 const { Notice } = require("../../models/notice");
 const { paginate } = require("../../utils");
 
-const getAllOwnerNotices = async (req, res) => {
+const getUserFavNotices = async (req, res) => {
   const { id: owner } = req.userId;
+
   const { page: processedPage, limit: processedLimit } = req.query;
 
   const { page, limit, skip } = paginate(processedPage, processedLimit);
 
   const totalNotices = await Notice.find({
-    owner,
+    favorite: owner,
   }).count();
 
-  const notices = await Notice.find({ owner }, "-__v", { skip, limit });
+  const notices = await Notice.find(
+    {
+      favorite: owner,
+    },
+    "-__v",
+    { skip, limit }
+  );
 
   res.json({
     status: "success",
@@ -26,4 +33,4 @@ const getAllOwnerNotices = async (req, res) => {
   });
 };
 
-module.exports = getAllOwnerNotices;
+module.exports = getUserFavNotices;
