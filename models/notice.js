@@ -47,7 +47,10 @@ const noticeSchema = new Schema(
     },
     price: { type: String },
   },
-  { versionKey: false, timestamps: true }
+  {
+    // versionKey: false,
+    timestamps: true,
+  }
 );
 
 const addNewNoticeSchema = Joi.object({

@@ -4,8 +4,8 @@ const remoweNoticeById = require("./remoweNoticeById");
 const getNoticeById = require("./getNoticeById");
 const getNoticeByName = require("./getNoticeByName");
 const addToFavourite = require("./addToFavourite");
-const findByNameAmongFav = require("./findByNameAmongFav");
-const deleteAmongFav = require("./deleteAmongFav");
+const findUserFavNotices = require("./findUserFavNotices");
+const deleteUserFavNotice = require("./deleteUserFavNotice");
 const getAllOwnerNotices = require("./getAllOwnerNotices");
 
 const { ctrlWrapper } = require("../../utils");
@@ -17,7 +17,7 @@ module.exports = {
   getNoticeById: ctrlWrapper(getNoticeById),
   getNoticeByName: ctrlWrapper(getNoticeByName),
   addToFavourite: ctrlWrapper(addToFavourite),
-  findByNameAmongFav: ctrlWrapper(findByNameAmongFav),
-  deleteAmongFav: ctrlWrapper(deleteAmongFav),
+  findUserFavNotices: ctrlWrapper(findUserFavNotices),
+  deleteUserFavNotice: ctrlWrapper(deleteUserFavNotice),
   getAllOwnerNotices: ctrlWrapper(getAllOwnerNotices),
 };

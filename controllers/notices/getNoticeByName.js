@@ -18,7 +18,7 @@ const getNoticeByName = async (req, res) => {
 
   const totalNotices = await Notice.find(query).count();
 
-  const notices = await Notice.find(query, "", { skip, limit });
+  const notices = await Notice.find(query, "-__v", { skip, limit });
 
   // if (!notices) {
   //   throw HttpError(404, "Not found");

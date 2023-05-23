@@ -7,9 +7,6 @@ const ctrl = require("../../controllers/notices");
 // створити ендпоінт для пошуку оголошеннь по заголовку
 router.get("/", ctrl.getNoticeByName);
 
-// створити ендпоінт для отримання оголошень по категоріям
-// router.get("/category/:type", ctrl.getNoticeByCategory);
-
 // створити ендпоінт для отримання одного оголошення
 router.get("/notice/:noticeId", ctrl.getNoticeById);
 
@@ -22,10 +19,10 @@ router.patch(
 );
 
 // створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
-router.get("/favourite", checkAuth, ctrl.findByNameAmongFav);
+router.get("/favourite", checkAuth, ctrl.findUserFavNotices);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
-router.delete("/favourite/:noticeId", checkAuth, ctrl.deleteAmongFav);
+router.delete("/favourite/:noticeId", checkAuth, ctrl.deleteUserFavNotice);
 
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
 router.post(
