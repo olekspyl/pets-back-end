@@ -1,28 +1,34 @@
 const { Notice } = require("../../models/notice");
+const { paginate } = require("../../utils");
 
 const getNoticeByName = async (req, res) => {
   //   const { _id: owner } = req.user;
 
-  let { page = 1, limit = 12, search = "" } = req.query;
+  const {
+    page: processedPage,
+    limit: processedLimit,
+    search = "",
+    category,
+  } = req.query;
 
-  const parsedPage = parseInt(page);
-  const parsedLimit = parseInt(limit);
-  page = parsedPage >= 1 ? parsedPage : 1;
-  limit = parsedLimit > 1 && parsedLimit < 12 ? parsedLimit : 12;
+  console.log("search", search);
 
-  const skip = (parseInt(page) - 1) * limit;
+  const { page, limit, skip } = paginate(processedPage, processedLimit);
 
-  const totalNotices = await Notice.find({
-    title: { $regex: search, $options: "i" },
-  }).count();
+  let query = category
+    ? { category, title: { $regex: search, $options: "i" } }
+    : { title: { $regex: search, $options: "i" } };
 
-  const notices = await Notice.find(
-    {
-      title: { $regex: search, $options: "i" },
-    },
-    "",
-    { skip, limit }
-  );
+  console.log("query", query);
+
+  const totalNotices = await Notice.find(query).count();
+
+  const notices = await Notice.find(query, "", { skip, limit });
+
+  console.log("notices", notices);
+  if (!notices) {
+    throw HttpError(404, "Not found");
+  }
 
   res.json({
     status: "success",

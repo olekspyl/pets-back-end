@@ -8,7 +8,7 @@ const ctrl = require("../../controllers/notices");
 router.get("/", ctrl.getNoticeByName);
 
 // створити ендпоінт для отримання оголошень по категоріям
-router.get("/category/:type", ctrl.getNoticeByCategory);
+// router.get("/category/:type", ctrl.getNoticeByCategory);
 
 // створити ендпоінт для отримання одного оголошення
 router.get("/notice/:noticeId", ctrl.getNoticeById);

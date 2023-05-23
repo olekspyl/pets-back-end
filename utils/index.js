@@ -1,7 +1,7 @@
 const HttpError = require("./HttpError");
 const ctrlWrapper = require("./ctrlWrapper");
 const handleMongooseError = require("./handleMongooseError");
-const paginate = require("./pagination");
+const paginate = require("./MakePagination");
 
 module.exports = {
   HttpError,
