@@ -1,7 +1,7 @@
 const { Notice } = require("../../models/notice");
 const { paginate } = require("../../utils");
 
-const findByNameAmongFav = async (req, res) => {
+const findUserFavNotices = async (req, res) => {
   const { id: owner } = req.userId;
 
   const { page: processedPage, limit: processedLimit } = req.query;
@@ -33,4 +33,4 @@ const findByNameAmongFav = async (req, res) => {
   });
 };
 
-module.exports = findByNameAmongFav;
+module.exports = findUserFavNotices;
