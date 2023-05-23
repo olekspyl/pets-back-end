@@ -9,12 +9,12 @@ router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
 router.post("/login", validateBody(schemas.loginSchema), ctrl.login);
 
 router.post("/logout", checkAuth, ctrl.logout);
-// router.patch(
-//   "/update",
-//   validateBody(schemas.updateUserSchema),
-//   ctrl.updateUserData
-// );
+router.put(
+  "/update",
+  checkAuth,
+  validateBody(schemas.updateUserSchema),
+  ctrl.updateUserData
+);
 router.get("/current", checkAuth, ctrl.getCurrentUser);
-// router.get("/current/pets", ctrl.getCurrentUserPets);
 
 module.exports = router;
