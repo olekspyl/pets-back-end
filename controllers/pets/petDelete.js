@@ -6,7 +6,6 @@ const petDelete = async (req, res) => {
 
   const { id: owner } = req.userId;
 
-  
   const result = await Pet.findOneAndDelete({
     _id: petId,
     owner,
@@ -19,6 +18,7 @@ const petDelete = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
+    data: result,
     message: "pet deleted",
   });
 };
