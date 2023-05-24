@@ -143,7 +143,14 @@
         },
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not found"
@@ -158,7 +165,7 @@
       }
     },
     "/users/update": {
-      "patch": {
+      "put": {
         "tags": ["Auth"],
         "description": "uptade user's information",
         "parameters": [],
@@ -228,16 +235,20 @@
         }
       }
     },
-    "/notices/category/:type": {
+    "/notices/user": {
       "get": {
         "tags": ["Notices"],
-        "description": "get notices by category",
+        "description": "get all notices from user",
         "parameters": [
           {
-            "in": "path",
-            "name": "type",
-            "required": true,
-            "description": "type of category"
+            "in": "query",
+            "name": "page",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": true
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -250,7 +261,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TitleNoticesResponse"
+                  "$ref": "#/components/schemas/AllOnerNoticesResponse"
                 }
               }
             }
@@ -267,7 +278,7 @@
         }
       }
     },
-    "/notices/:noticeId": {
+    "/notices/notice/:noticeId": {
       "get": {
         "tags": ["Notices"],
         "description": "get notices by id",
@@ -341,13 +352,21 @@
       "post": {
         "tags": ["Notices"],
         "description": "add notice in appropriate category",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "category",
+            "required": true,
+            "description": "category of notice"
+          }
+        ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddNoticeRequest"
+                "$ref": "#/components/schemas/AddNotice"
               }
             }
           }
@@ -358,7 +377,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddNoticeRequest"
+                  "$ref": "#/components/schemas/AddNotice"
                 }
               }
             }
@@ -396,7 +415,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToFavouriteRequest"
+                "$ref": "#/components/schemas/AddToFavourite"
               }
             }
           }
@@ -407,7 +426,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddToFavouriteRequest"
+                  "$ref": "#/components/schemas/AddToFavourite"
                 }
               }
             }
@@ -422,9 +441,39 @@
             "description": "Server error"
           }
         }
+      },
+      "delete": {
+        "tags": ["Notices"],
+        "description": "delete notice from favourite",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "noticeId",
+            "required": true,
+            "description": "id of notice"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "notice deleted from favorites"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
-    "/:noticeId": {
+    "/notices/:noticeId": {
       "delete": {
         "tags": ["Notices"],
         "description": "delete notice",
@@ -456,6 +505,7 @@
         }
       }
     },
+
     "/pets/": {
       "post": {
         "tags": ["Pets"],
@@ -572,6 +622,11 @@
       "UpdateRequest": {
         "type": "object",
         "properties": {
+          "imgURL": {
+            "type": "string",
+            "description": "user's avatar",
+            "example": "path"
+          },
           "name": {
             "type": "string",
             "description": "user's name",
@@ -594,10 +649,31 @@
           }
         }
       },
-      "TitleNoticesResponse": {
-        "type": "array",
+      "CurrentUserResponse": {
+        "type": "object",
         "properties": {
-          "notices": {
+          "userInfo": {
+            "type": "object",
+            "description": "info about the user",
+            "example": "{}"
+          },
+          "petsInfo": {
+            "type": "array",
+            "description": "info about user's pets",
+            "example": "[]"
+          }
+        }
+      },
+      "AllOnerNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "data": {
             "type": "object"
           }
         }
@@ -608,7 +684,7 @@
       "FavouriteResponse": {
         "type": "object"
       },
-      "AddNoticeRequest": {
+      "AddNotice": {
         "type": "object",
         "properties": {
           "title": {
@@ -638,11 +714,29 @@
           "comments": {
             "type": "string",
             "example": "Maybe, it's your new friend?"
+          },
+          "category": {
+            "type": "string",
+            "example": "my pet"
+          },
+          "imageURL": {
+            "type": "string",
+            "example": "dsliuhfvldris"
+          },
+          "owner": {
+            "type": "string",
+            "example": "Anna@example.com"
           }
         }
       },
-      "AddToFavouriteRequest": {
-        "type": "object"
+      "AddToFavourite": {
+        "type": "object",
+        "properties": {
+          "favourite": {
+            "type": "boolean",
+            "example": "true"
+          }
+        }
       },
       "AddPetRequest": {
         "type": "object",

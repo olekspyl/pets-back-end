@@ -1,7 +1,7 @@
 const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
-const remoweNoticeById = async (req, res) => {
+const removeNoticeById = async (req, res) => {
   const { id: owner } = req.userId;
   const { noticeId } = req.params;
 
@@ -16,10 +16,10 @@ const remoweNoticeById = async (req, res) => {
 
   res.json({
     status: "success",
-    code: 200,
+    code: 204,
     data: result,
     message: "notice deleted",
   });
 };
 
-module.exports = remoweNoticeById;
+module.exports = removeNoticeById;

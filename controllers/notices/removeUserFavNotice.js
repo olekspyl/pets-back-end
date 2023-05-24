@@ -23,7 +23,7 @@ const removeUserFavNotice = async (req, res) => {
 
   res.json({
     status: "success",
-    code: 200,
+    code: 204,
     message: "notice deleted from favorites",
     result,
   });

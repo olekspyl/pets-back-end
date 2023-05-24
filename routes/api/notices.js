@@ -10,6 +10,12 @@ router.get("/", ctrl.getNoticeByName);
 // створити ендпоінт для отримання одного оголошення
 router.get("/notice/:noticeId", ctrl.getNoticeById);
 
+// створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
+router.get("/favourite", checkAuth, ctrl.getUserFavNotices);
+
+// створити ендпоінт для отримання оголошень авторизованого кристувача створених цим же користувачем
+router.get("/user", checkAuth, ctrl.getOwnerAllNotices);
+
 // створити ендпоінт для додавання оголошення до обраних
 router.patch(
   "/favourite/:noticeId",
@@ -18,26 +24,19 @@ router.patch(
   ctrl.addToFavourite
 );
 
-// створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
-router.get("/favourite", checkAuth, ctrl.getUserFavNotices);
-
-// створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
-router.delete("/favourite/:noticeId", checkAuth, ctrl.removeUserFavNotice);
-
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
 router.post(
   "/category",
   checkAuth,
   validateBody(schemas.addNewNoticeSchema),
   uploadCloud.single("image"),
-
   ctrl.addNoticeInCategory
 );
 
-// створити ендпоінт для отримання оголошень авторизованого кристувача створених цим же користувачем
-router.get("/user", checkAuth, ctrl.getOwnerAllNotices);
+// створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
+router.delete("/favourite/:noticeId", checkAuth, ctrl.removeUserFavNotice);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
-router.delete("/:noticeId", checkAuth, ctrl.remoweNoticeById);
+router.delete("/:noticeId", checkAuth, ctrl.removeNoticeById);
 
 module.exports = router;
