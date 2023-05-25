@@ -117,7 +117,7 @@
           "required": false
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Success logout"
           },
           "404": {
@@ -278,7 +278,7 @@
         }
       }
     },
-    "/notices/notice/:noticeId": {
+    "/notices/notice/{noticeId}": {
       "get": {
         "tags": ["Notices"],
         "description": "get notices by id",
@@ -397,7 +397,7 @@
         }
       }
     },
-    "/notices/favourite/:noticeId": {
+    "/notices/favourite/{noticeId}": {
       "patch": {
         "tags": ["Notices"],
         "description": "add notice to favourite",
@@ -458,7 +458,7 @@
           "required": false
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "notice deleted from favorites"
           },
           "404": {
@@ -473,7 +473,7 @@
         }
       }
     },
-    "/notices/:noticeId": {
+    "/notices/{noticeId}": {
       "delete": {
         "tags": ["Notices"],
         "description": "delete notice",
@@ -490,7 +490,7 @@
           "required": false
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Success"
           },
           "404": {
@@ -565,7 +565,7 @@
           "required": false
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Success"
           },
           "404": {
