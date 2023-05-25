@@ -23,6 +23,10 @@ const userSchema = new Schema(
     },
     phone: String,
     city: String,
+    isFirstSign: {
+      type: Boolean,
+      default: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -30,6 +34,7 @@ const userSchema = new Schema(
 const registerSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().required(),
+  isFirstSign: Joi.boolean(),
 });
 
 const loginSchema = Joi.object({

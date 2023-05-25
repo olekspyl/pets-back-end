@@ -548,7 +548,7 @@
         }
       }
     },
-    "/pets/:petId": {
+    "/pets/{petId}": {
       "delete": {
         "tags": ["Pets"],
         "description": "delete pet by id",
