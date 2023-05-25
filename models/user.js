@@ -15,18 +15,14 @@ const userSchema = new Schema(
     },
 
     avatarURL: { type: String },
-    token: String,
-    name: String,
+    token: { type: String },
+    name: { type: String },
     birthday: {
       type: String,
       match: /^\d{2}.\d{2}.\d{4}$/,
     },
-    phone: String,
-    city: String,
-    isFirstSign: {
-      type: Boolean,
-      default: true,
-    },
+    phone: { type: String },
+    city: { type: String },
   },
   { versionKey: false, timestamps: true }
 );
@@ -34,7 +30,7 @@ const userSchema = new Schema(
 const registerSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().required(),
-  isFirstSign: Joi.boolean(),
+  isFirstSign: Joi.boolean().required(),
 });
 
 const loginSchema = Joi.object({
