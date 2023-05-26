@@ -30,7 +30,6 @@ const userSchema = new Schema(
 const registerSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().required(),
-  isFirstSign: Joi.boolean().required(),
 });
 
 const loginSchema = Joi.object({
