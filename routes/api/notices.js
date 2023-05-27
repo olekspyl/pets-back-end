@@ -28,8 +28,8 @@ router.patch(
 router.post(
   "/category",
   checkAuth,
-  validateBody(schemas.addNewNoticeSchema),
   uploadCloud.single("image"),
+  validateBody(schemas.addNewNoticeSchema),
   ctrl.addNoticeInCategory
 );
 
