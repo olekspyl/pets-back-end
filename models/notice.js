@@ -61,6 +61,7 @@ const addNewNoticeSchema = Joi.object({
   place: Joi.string().required(),
   sex: Joi.string().required(),
   comments: Joi.string(),
+  price: Joi.string(),
 });
 
 const updateNoticeToFavoriteSchema = Joi.object({
