@@ -7,14 +7,17 @@ const petSchema = new Schema({
     type: String,
     required: [true, "Set name"],
   },
+
   dateOfBirth: {
     type: String,
     required: [true, "Set date of birth"],
   },
+
   breed: {
     type: String,
     required: [true, "Set breed"],
   },
+  
   imgURL: { type: String, required: true },
 
   comments: String,
@@ -30,8 +33,7 @@ const addNewPetSchema = Joi.object({
   name: Joi.string().required(),
   dateOfBirth: Joi.string().required(),
   breed: Joi.string().required(),
-
-  comments: Joi.string(),
+  comments: Joi.string().allow(""),
 });
 
 const schemas = {

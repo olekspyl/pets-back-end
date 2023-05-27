@@ -8,30 +8,38 @@ const noticeSchema = new Schema(
       type: String,
       required: [true, "Set title"],
     },
+
     category: {
       type: String,
       enum: ["sell", "lost-found", "for-free"],
       required: true,
       default: "sell",
     },
+
     imgURL: { type: String, required: true },
+
     name: { type: String },
+
     dateOfBirth: {
       type: String,
       required: [true, "Set date of birth"],
     },
+
     breed: {
       type: String,
       required: [true, "Set breed"],
     },
+
     place: {
       type: String,
       required: [true, "Set place"],
     },
+
     sex: {
       type: String,
       required: [true, "Set the sex"],
     },
+
     comments: String,
 
     favorite: {
@@ -40,15 +48,16 @@ const noticeSchema = new Schema(
       default: [],
       required: true,
     },
+
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
     },
+
     price: { type: String },
   },
   {
-    // versionKey: false,
     timestamps: true,
   }
 );
@@ -60,8 +69,8 @@ const addNewNoticeSchema = Joi.object({
   breed: Joi.string().required(),
   place: Joi.string().required(),
   sex: Joi.string().required(),
-  comments: Joi.string(),
-  price: Joi.string(),
+  comments: Joi.string().allow(""),
+  price: Joi.string().allow(""),
 });
 
 const updateNoticeToFavoriteSchema = Joi.object({
