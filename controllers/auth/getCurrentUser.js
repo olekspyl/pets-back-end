@@ -16,7 +16,7 @@ const getCurrentUser = async (req, res) => {
 
   const petsInfo = await Pet.find({ owner: id });
 
-  res.status(201).json({ userInfo, petsInfo });
+  res.status(200).json({ userInfo, petsInfo });
 };
 
 module.exports = getCurrentUser;
