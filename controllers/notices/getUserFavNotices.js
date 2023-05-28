@@ -19,7 +19,7 @@ const getUserFavNotices = async (req, res) => {
     "-__v",
     { skip, limit }
   )
-    .sort({ createdAt: -1 })
+    .sort({ updatedAt: -1 })
     .populate("owner", "name email phone city");
 
   res.json({
