@@ -38,6 +38,7 @@ const addNewPetSchema = Joi.object({
   name: Joi.string().required(),
   dateOfBirth: Joi.string().required(),
   breed: Joi.string().required(),
+  imgURL: Joi.string().required(),
   comments: Joi.string().allow(""),
 });
 

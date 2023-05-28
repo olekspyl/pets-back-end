@@ -34,7 +34,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
+                "$ref": "#/components/schemas/RegistrationOrLoginRequest"
               }
             }
           }
@@ -76,7 +76,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
+                "$ref": "#/components/schemas/RegistrationOrLoginRequest"
               }
             }
           }
@@ -87,7 +87,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponse"
+                  "$ref": "#/components/schemas/LoginResponse"
                 }
               }
             }
@@ -118,7 +118,14 @@
         },
         "responses": {
           "200": {
-            "description": "Success logout"
+            "description": "Success logout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not found"
@@ -135,7 +142,7 @@
     "/users/current": {
       "get": {
         "tags": ["Auth"],
-        "description": "define current user",
+        "description": "define current user and his pets",
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -186,7 +193,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateRequest"
+                  "$ref": "#/components/schemas/UpdateResponse"
                 }
               }
             }
@@ -218,7 +225,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TitleNoticesResponse"
+                  "$ref": "#/components/schemas/GetNoticesByNameResponse"
                 }
               }
             }
@@ -261,7 +268,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AllOnerNoticesResponse"
+                  "$ref": "#/components/schemas/FavoriteNoticesOrUserNoticesResponse"
                 }
               }
             }
@@ -300,7 +307,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NoticeIdResponse"
+                  "$ref": "#/components/schemas/GetNoticeByIdResponse"
                 }
               }
             }
@@ -317,10 +324,10 @@
         }
       }
     },
-    "/notices/favourite": {
+    "/notices/favorite": {
       "get": {
         "tags": ["Notices"],
-        "description": "find by title notices among favourite",
+        "description": "find by title notices among favorite",
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": false
@@ -331,7 +338,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FavouriteResponse"
+                  "$ref": "#/components/schemas/FavoriteNoticesOrUserNoticesResponse"
                 }
               }
             }
@@ -366,7 +373,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddNotice"
+                "$ref": "#/components/schemas/AddNoticeRequest"
               }
             }
           }
@@ -377,7 +384,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddNotice"
+                  "$ref": "#/components/schemas/AddNoticeResponse"
                 }
               }
             }
@@ -397,10 +404,10 @@
         }
       }
     },
-    "/notices/favourite/{noticeId}": {
+    "/notices/favorite/{noticeId}": {
       "patch": {
         "tags": ["Notices"],
-        "description": "add notice to favourite",
+        "description": "add notice to favorite",
         "parameters": [
           {
             "in": "path",
@@ -415,7 +422,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToFavourite"
+                "$ref": "#/components/schemas/AddToFavorite"
               }
             }
           }
@@ -426,7 +433,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddToFavourite"
+                  "$ref": "#/components/schemas/AddToFavorite"
                 }
               }
             }
@@ -444,7 +451,7 @@
       },
       "delete": {
         "tags": ["Notices"],
-        "description": "delete notice from favourite",
+        "description": "delete notice from favorite",
         "parameters": [
           {
             "in": "path",
@@ -528,7 +535,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddPetRequest"
+                  "$ref": "#/components/schemas/AddPetResponse"
                 }
               }
             }
@@ -566,7 +573,14 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletePetResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not found"
@@ -583,7 +597,7 @@
   },
   "components": {
     "schemas": {
-      "RegistrationRequest": {
+      "RegistrationOrLoginRequest": {
         "type": "object",
         "required": ["email", "password"],
         "properties": {
@@ -607,25 +621,150 @@
             "description": "user's email",
             "format": "email"
           },
-          "userId": {
-            "type": "integer",
+          "password": {
+            "type": "string",
+            "description": "user's password",
+            "example": "qwe123"
+          },
+          "_id": {
+            "type": "string",
             "description": "user's id",
             "example": "21232134214"
           },
           "token": {
-            "type": "integer",
+            "type": "string",
             "description": "user's authorization token",
             "example": "21232134214dtghfxdhreh_cyjfgnvdz"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "exact time of request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "exact time of update request",
+            "example": "2023-05-28T12:47:09.056Z"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "description": "user's information",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "user's email",
+                "format": "email"
+              },
+              "password": {
+                "type": "string",
+                "description": "user's password",
+                "example": "qwe123"
+              },
+              "_id": {
+                "type": "string",
+                "description": "user's id",
+                "example": "21232134214"
+              },
+              "token": {
+                "type": "string",
+                "description": "user's authorization token",
+                "example": "21232134214dtghfxdhreh_cyjfgnvdz"
+              },
+              "createdAt": {
+                "type": "string",
+                "description": "exact time of request",
+                "example": "2023-05-28T12:47:09.056Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "description": "exact time of update request",
+                "example": "2023-05-28T12:47:09.056Z"
+              }
+            }
+          }
+        }
+      },
+      "LogoutResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Succes logout"
           }
         }
       },
       "UpdateRequest": {
         "type": "object",
         "properties": {
-          "imgURL": {
+          "avatarURL": {
             "type": "string",
             "description": "user's avatar",
-            "example": "path"
+            "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685276441/iumbyiutbevhbiublwsy.jpg"
+          },
+          "name": {
+            "type": "string",
+            "description": "user's name",
+            "example": "Ondatra"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "user's day of birth",
+            "example": "18.09.1995"
+          },
+          "phone": {
+            "type": "string",
+            "description": "user's phone number",
+            "example": "+3801231212"
+          },
+          "city": {
+            "type": "string",
+            "description": "user's location",
+            "example": "Kyiv"
+          }
+        }
+      },
+      "UpdateResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "user's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "user's password",
+            "example": "qwe123"
+          },
+          "_id": {
+            "type": "string",
+            "description": "user's id",
+            "example": "21232134214"
+          },
+          "token": {
+            "type": "string",
+            "description": "user's authorization token",
+            "example": "21232134214dtghfxdhreh_cyjfgnvdz"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "exact time of request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "exact time of update request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "user's avatar",
+            "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685276441/iumbyiutbevhbiublwsy.jpg"
           },
           "name": {
             "type": "string",
@@ -655,36 +794,361 @@
           "userInfo": {
             "type": "object",
             "description": "info about the user",
-            "example": "{}"
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "user's email",
+                "format": "email"
+              },
+              "_id": {
+                "type": "string",
+                "description": "user's id",
+                "example": "21232134214"
+              },
+              "birthday": {
+                "type": "string",
+                "description": "user's day of birth",
+                "example": "18.09.1995"
+              },
+              "name": {
+                "type": "string",
+                "description": "user's name",
+                "example": "Ondatra"
+              },
+              "phone": {
+                "type": "string",
+                "description": "user's phone number",
+                "example": "+3801231212"
+              },
+              "city": {
+                "type": "string",
+                "description": "user's location",
+                "example": "Kyiv"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "user's avatar",
+                "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685276441/iumbyiutbevhbiublwsy.jpg"
+              }
+            }
           },
           "petsInfo": {
             "type": "array",
             "description": "info about user's pets",
-            "example": "[]"
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "pet's id",
+                  "example": "21232134214"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "pet's name",
+                  "example": "Doggy"
+                },
+                "dateOfBirth": {
+                  "type": "string",
+                  "description": "pet's birthday",
+                  "example": "12.05.2020"
+                },
+                "breed": {
+                  "type": "string",
+                  "description": "pet's breed",
+                  "example": "street dog"
+                },
+                "imgURL": {
+                  "type": "string",
+                  "description": "user's avatar",
+                  "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685276688/kipjbjdh1cx68bouputu.jpg"
+                },
+                "comments": {
+                  "type": "string",
+                  "description": "anything about pet",
+                  "example": "Сute and good pet dog"
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "owner of pet",
+                  "example": "646b9e402ce63de4e0c09505"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "description": "exact time of request",
+                  "example": "2023-05-28T12:47:09.056Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "description": "exact time of update request",
+                  "example": "2023-05-28T12:47:09.056Z"
+                },
+                "__v": {
+                  "type": "string",
+                  "description": "version",
+                  "example": "0"
+                }
+              }
+            }
           }
         }
       },
-      "AllOnerNoticesResponse": {
+      "GetNoticesByNameResponse": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "status": {
-            "type": "string"
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "example": "200"
           },
           "data": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "totalNotices": {
+                "type": "integer",
+                "example": "21"
+              },
+              "page": {
+                "type": "integer",
+                "example": "1"
+              },
+              "totalPages": {
+                "type": "integer",
+                "example": "3"
+              },
+              "currentOnPage": {
+                "type": "integer",
+                "example": "12"
+              },
+              "notices": {
+                "type": "array",
+                "description": "notices by name",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "notice's id",
+                      "example": "21232134214"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Kitty"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Cat"
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "for-free"
+                    },
+                    "dateOfBirth": {
+                      "type": "string",
+                      "example": "05.05.2015"
+                    },
+                    "place": {
+                      "type": "string",
+                      "example": "Lviv"
+                    },
+                    "breed": {
+                      "type": "string",
+                      "example": "uknown"
+                    },
+                    "sex": {
+                      "type": "string",
+                      "example": "girl"
+                    },
+                    "comments": {
+                      "type": "string",
+                      "example": "Maybe, it's your new friend?"
+                    },
+                    "imgURL": {
+                      "type": "string",
+                      "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685278404/pfjftq95jjtggurjuavm.jpg"
+                    },
+                    "favorite": {
+                      "type": "array",
+                      "example": "[]"
+                    },
+                    "owner": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "description": "user's email",
+                          "format": "email"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "user's name",
+                          "example": "OYOYOYO"
+                        },
+                        "_id": {
+                          "type": "string",
+                          "description": "user's id",
+                          "example": "21232134214"
+                        }
+                      }
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "exact time of request",
+                      "example": "2023-05-28T12:47:09.056Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "exact time of update request",
+                      "example": "2023-05-28T12:47:09.056Z"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
-      "NoticeIdResponse": {
-        "type": "object"
+      "GetNoticeByIdResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "notice": {
+                "type": "object",
+                "description": "notice by id",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "notice's id",
+                    "example": "21232134214"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Kitty"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Cat"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "for-free"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "example": "05.05.2015"
+                  },
+                  "place": {
+                    "type": "string",
+                    "example": "Lviv"
+                  },
+                  "breed": {
+                    "type": "string",
+                    "example": "uknown"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "example": "girl"
+                  },
+                  "comments": {
+                    "type": "string",
+                    "example": "Maybe, it's your new friend?"
+                  },
+                  "imgURL": {
+                    "type": "string",
+                    "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685278404/pfjftq95jjtggurjuavm.jpg"
+                  },
+                  "favorite": {
+                    "type": "array",
+                    "example": "[]"
+                  },
+                  "owner": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string",
+                        "description": "user's email",
+                        "format": "email"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "user's name",
+                        "example": "OYOYOYO"
+                      },
+                      "_id": {
+                        "type": "string",
+                        "description": "user's id",
+                        "example": "21232134214"
+                      }
+                    }
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "exact time of request",
+                    "example": "2023-05-28T12:47:09.056Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "exact time of update request",
+                    "example": "2023-05-28T12:47:09.056Z"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
-      "FavouriteResponse": {
-        "type": "object"
+      "FavoriteNoticesOrUserNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "totalNotices": {
+                "type": "integer",
+                "example": "0"
+              },
+              "page": {
+                "type": "integer",
+                "example": "1"
+              },
+              "totalPages": {
+                "type": "integer",
+                "example": "1"
+              },
+              "currentOnPage": {
+                "type": "integer",
+                "example": "1"
+              },
+              "notices": {
+                "type": "array",
+                "example": "[]"
+              }
+            }
+          }
+        }
       },
-      "AddNotice": {
+      "AddNoticeRequest": {
         "type": "object",
         "properties": {
           "title": {
@@ -715,24 +1179,86 @@
             "type": "string",
             "example": "Maybe, it's your new friend?"
           },
-          "category": {
+          "price": {
             "type": "string",
-            "example": "my pet"
-          },
-          "imageURL": {
-            "type": "string",
-            "example": "dsliuhfvldris"
-          },
-          "owner": {
-            "type": "string",
-            "example": "Anna@example.com"
+            "example": "for free"
           }
         }
       },
-      "AddToFavourite": {
+      "AddNoticeResponse": {
         "type": "object",
         "properties": {
-          "favourite": {
+          "title": {
+            "type": "string",
+            "example": "Kitty"
+          },
+          "category": {
+            "type": "string",
+            "example": "sell"
+          },
+          "name": {
+            "type": "string",
+            "example": "Cat"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "05.05.2015"
+          },
+          "place": {
+            "type": "string",
+            "example": "Lviv"
+          },
+          "breed": {
+            "type": "string",
+            "example": "uknown"
+          },
+          "sex": {
+            "type": "string",
+            "example": "girl"
+          },
+          "comments": {
+            "type": "string",
+            "example": "Maybe, it's your new friend?"
+          },
+          "price": {
+            "type": "string",
+            "example": "for free"
+          },
+          "favorite": {
+            "type": "array",
+            "example": "[]"
+          },
+          "_id": {
+            "type": "string",
+            "description": "notice's id",
+            "example": "21232134214"
+          },
+          "owner": {
+            "type": "string",
+            "description": "owner of pet",
+            "example": "646b9e402ce63de4e0c09505"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "exact time of request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "exact time of update request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "__v": {
+            "type": "string",
+            "description": "version",
+            "example": "0"
+          }
+        }
+      },
+      "AddToFavorite": {
+        "type": "object",
+        "properties": {
+          "favorite": {
             "type": "boolean",
             "example": "true"
           }
@@ -752,6 +1278,119 @@
           "breed": {
             "type": "string",
             "example": "uknown"
+          },
+          "imgURL": {
+            "type": "string",
+            "example": "https://www.spokojenypes.cz/ImgP.ashx?co=/ImgGalery/img1/clanky/blog-pes-zrak.png&fd=u2&pa=1"
+          }
+        }
+      },
+      "AddPetResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Cat"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "05.05.2015"
+          },
+          "breed": {
+            "type": "string",
+            "example": "uknown"
+          },
+          "imgURL": {
+            "type": "string",
+            "example": "https://www.spokojenypes.cz/ImgP.ashx?co=/ImgGalery/img1/clanky/blog-pes-zrak.png&fd=u2&pa=1"
+          },
+          "owner": {
+            "type": "string",
+            "description": "owner of pet",
+            "example": "646b9e402ce63de4e0c09505"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "exact time of request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "exact time of update request",
+            "example": "2023-05-28T12:47:09.056Z"
+          },
+          "__v": {
+            "type": "string",
+            "description": "version",
+            "example": "0"
+          },
+          "_id": {
+            "type": "string",
+            "description": "user's id",
+            "example": "21232134214"
+          }
+        }
+      },
+      "DeletePetResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Cat"
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "example": "05.05.2015"
+              },
+              "breed": {
+                "type": "string",
+                "example": "uknown"
+              },
+              "imgURL": {
+                "type": "string",
+                "example": "https://www.spokojenypes.cz/ImgP.ashx?co=/ImgGalery/img1/clanky/blog-pes-zrak.png&fd=u2&pa=1"
+              },
+              "owner": {
+                "type": "string",
+                "description": "owner of pet",
+                "example": "646b9e402ce63de4e0c09505"
+              },
+              "createdAt": {
+                "type": "string",
+                "description": "exact time of request",
+                "example": "2023-05-28T12:47:09.056Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "description": "exact time of update request",
+                "example": "2023-05-28T12:47:09.056Z"
+              },
+              "__v": {
+                "type": "string",
+                "description": "version",
+                "example": "0"
+              },
+              "_id": {
+                "type": "string",
+                "description": "user's id",
+                "example": "21232134214"
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "example": "pet deleted"
           }
         }
       }

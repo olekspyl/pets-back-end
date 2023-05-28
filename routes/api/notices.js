@@ -11,17 +11,17 @@ router.get("/", ctrl.getNoticeByName);
 router.get("/notice/:noticeId", ctrl.getNoticeById);
 
 // створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
-router.get("/favourite", checkAuth, ctrl.getUserFavNotices);
+router.get("/favorite", checkAuth, ctrl.getUserFavNotices);
 
 // створити ендпоінт для отримання оголошень авторизованого кристувача створених цим же користувачем
 router.get("/user", checkAuth, ctrl.getOwnerAllNotices);
 
 // створити ендпоінт для додавання оголошення до обраних
 router.patch(
-  "/favourite/:noticeId",
+  "/favorite/:noticeId",
   checkAuth,
   //   validateBody(schemas.updatePetToFavoriteSchema),
-  ctrl.addToFavourite
+  ctrl.addToFavorite
 );
 
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії

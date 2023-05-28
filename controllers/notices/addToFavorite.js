@@ -1,7 +1,7 @@
 const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
-const addToFavourite = async (req, res) => {
+const addToFavorite = async (req, res) => {
   const { id: userId } = req.userId;
   const { noticeId } = req.params;
 
@@ -35,4 +35,4 @@ const addToFavourite = async (req, res) => {
   });
 };
 
-module.exports = addToFavourite;
+module.exports = addToFavorite;
