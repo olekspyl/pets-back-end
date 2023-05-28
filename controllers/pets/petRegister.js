@@ -6,7 +6,7 @@ const petRegister = async (req, res) => {
 
   const pet = await Pet.findOne({ owner: id, name: req.body.name });
   if (pet) {
-    throw HttpError(401, "Pet found");
+    throw HttpError(409, "You have already added an animal with that name");
   }
 
   let newPet = {
