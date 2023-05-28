@@ -8,7 +8,7 @@ const addNoticeInCategory = async (req, res) => {
     ...req.body,
     category,
     owner,
-    imgURL: "dhfgudhfgud",
+    imgURL: "",
   };
 
   if (req.file) {

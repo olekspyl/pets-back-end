@@ -34,7 +34,7 @@ router.post(
 );
 
 // створити ендпоінт для видалення оголошення авторизованого користувача доданих цим же до обраних
-router.delete("/favourite/:noticeId", checkAuth, ctrl.removeUserFavNotice);
+router.delete("/favorite/:noticeId", checkAuth, ctrl.removeUserFavNotice);
 
 // створити ендпоінт для видалення оголошення авторизованого користувача створеного цим же користувачем
 router.delete("/:noticeId", checkAuth, ctrl.removeNoticeById);

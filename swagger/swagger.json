@@ -422,7 +422,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddToFavorite"
+                "$ref": "#/components/schemas/AddToFavoriteRequest"
               }
             }
           }
@@ -433,7 +433,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddToFavorite"
+                  "$ref": "#/components/schemas/AddToFavoriteResponse"
                 }
               }
             }
@@ -1255,12 +1255,104 @@
           }
         }
       },
-      "AddToFavorite": {
+      "AddToFavoriteRequest": {
         "type": "object",
         "properties": {
           "favorite": {
             "type": "boolean",
             "example": "true"
+          }
+        }
+      },
+      "AddToFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Kitty"
+                  },
+                  "category": {
+                    "type": "string",
+                    "example": "sell"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Cat"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "example": "05.05.2015"
+                  },
+                  "imgURL": {
+                    "type": "string",
+                    "example": "https://res.cloudinary.com/dpa3xbrjh/image/upload/v1685278404/pfjftq95jjtggurjuavm.jpg"
+                  },
+                  "place": {
+                    "type": "string",
+                    "example": "Lviv"
+                  },
+                  "breed": {
+                    "type": "string",
+                    "example": "uknown"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "example": "girl"
+                  },
+                  "comments": {
+                    "type": "string",
+                    "example": "Maybe, it's your new friend?"
+                  },
+                  "price": {
+                    "type": "string",
+                    "example": "for free"
+                  },
+                  "favorite": {
+                    "type": "array",
+                    "example": "[]"
+                  },
+                  "_id": {
+                    "type": "string",
+                    "description": "notice's id",
+                    "example": "21232134214"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "description": "owner of pet",
+                    "example": "646b9e402ce63de4e0c09505"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "exact time of request",
+                    "example": "2023-05-28T12:47:09.056Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "exact time of update request",
+                    "example": "2023-05-28T12:47:09.056Z"
+                  },
+                  "__v": {
+                    "type": "string",
+                    "description": "version",
+                    "example": "0"
+                  }
+                }
+              }
+            }
           }
         }
       },
