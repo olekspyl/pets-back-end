@@ -1,6 +1,5 @@
 const { Notice } = require("../../models/notice");
 const { paginate } = require("../../utils");
-// const { HttpError } = require("../../utils");
 
 const getNoticeByName = async (req, res) => {
   const {
@@ -21,10 +20,6 @@ const getNoticeByName = async (req, res) => {
   const notices = await Notice.find(query, "-__v", { skip, limit })
     .sort({ createdAt: -1 })
     .populate("owner", "name email phone city");
-
-  // if (!notices) {
-  //   throw HttpError(404, "Not found");
-  // }
 
   res.json({
     status: "success",

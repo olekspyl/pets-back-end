@@ -38,7 +38,6 @@ const loginSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  // category: Joi.string(),
   name: Joi.string(),
   birthday: Joi.string(),
   phone: Joi.string(),
