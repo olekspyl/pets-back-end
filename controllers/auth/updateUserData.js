@@ -12,7 +12,7 @@ const updateUserData = async (req, res) => {
     const { path } = req.file;
     updatedUser = {
       ...req.body,
-      imgURL: path,
+      avatarURL: path,
     };
   }
 

@@ -2,32 +2,37 @@ const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../utils");
 const Joi = require("joi");
 
-const petSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Set name"],
-  },
+const petSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Set name"],
+    },
 
-  dateOfBirth: {
-    type: String,
-    required: [true, "Set date of birth"],
-  },
+    dateOfBirth: {
+      type: String,
+      required: [true, "Set date of birth"],
+    },
 
-  breed: {
-    type: String,
-    required: [true, "Set breed"],
-  },
-  
-  imgURL: { type: String, required: true },
+    breed: {
+      type: String,
+      required: [true, "Set breed"],
+    },
 
-  comments: String,
+    imgURL: { type: String, required: true },
 
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
+    comments: String,
+
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const addNewPetSchema = Joi.object({
   name: Joi.string().required(),
