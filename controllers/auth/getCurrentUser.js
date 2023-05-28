@@ -14,7 +14,7 @@ const getCurrentUser = async (req, res) => {
     throw HttpError(404, "User not fund");
   }
 
-  const petsInfo = await Pet.find({ owner: id });
+  const petsInfo = await Pet.find({ owner: id }).sort({ createdAt: -1 });
 
   res.status(200).json({ userInfo, petsInfo });
 };
