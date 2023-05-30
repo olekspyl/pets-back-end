@@ -23,7 +23,15 @@ const login = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    user: { ...user._doc, token },
+    user: {
+      _id: user._doc._id,
+      email: user._doc.email,
+      createdAt: "2023-05-22T17:00:32.675Z",
+      updatedAt: user._doc.updatedAt,
+      city: user._doc.city,
+      avatarURL: user._doc.avatarURL,
+      token,
+    },
   });
 };
 module.exports = login;
