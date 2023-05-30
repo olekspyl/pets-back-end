@@ -1,16 +1,36 @@
-## GoIT Node.js Course Template Homework
+# Pets Project
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+This project is provided with convenient and simple for understanding RESTful API built with Node.js and Express.
+It provides a powerful solution for managing data resources in web, with support for basic CRUD functionality using GET, POST, PATCH, PUT and DELETE methods. It supports such authentication methods, as JWT to keep data secure and private.
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
+## Tools:
 
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
+Pets Project is built using the following tools:
 
-### Команди:
+- MongoDB
+- Express.js
+- Node.js
 
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
+### Installation
+
+To install Pet Project, follow these steps:
+
+Clone the Pets Project repository to your local machine using git clone https://github.com/olekspyl/pets-back-end
+Navigate to the project directory using cd.
+Install dependencies using npm install.
+Create a .env file and add:
+
+1. your MongoDB connection string. Example: mongodb+srv://something
+2. your BASE_URL connection string. Example: http://localhost:3001
+3. your PORT. Example: 3001
+4. your SECRET_KEY for authorization. Example: CUUqmchjyfW
+5. your CLOUDINARY_NAME (example: jya3xbrih), CLOUDINARY_KEY (example: 6458678898900) and CLOUDINARY_SECRET (example: f7kw5wWcJVPGLschgnffjvjmmVoT4r5c) for saving pictures at Cloudinary service.
+
+Start the server using npm start.
+
+#### Clone Repo
+
+To clone this repository, use one of the following links:
+
+HTTPS: https://github.com/olekspyl/pets-back-end.git
+GitHub CLI: gh repo clone olekspyl/pets-back-end
