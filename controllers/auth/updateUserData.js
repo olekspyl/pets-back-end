@@ -27,8 +27,6 @@ const updateUserData = async (req, res) => {
   delete updatedUserObject.password;
 
   res.json(updatedUserObject);
-
-  // res.json(result);
 };
 
 module.exports = updateUserData;
