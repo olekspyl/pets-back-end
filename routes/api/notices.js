@@ -8,7 +8,7 @@ const ctrl = require("../../controllers/notices");
 router.get("/", ctrl.getNoticeByName);
 
 // створити ендпоінт для отримання одного оголошення
-router.get("/notice/:noticeId", ctrl.getNoticeById);
+router.get("/notice/:id", ctrl.getNoticeById);
 
 // створити ендпоінт для отримання оголошень авторизованого користувача доданих ним же в обрані
 router.get("/favorite", checkAuth, ctrl.getUserFavNotices);

@@ -285,7 +285,7 @@
         }
       }
     },
-    "/notices/notice/{noticeId}": {
+    "/notices/notice/{id}": {
       "get": {
         "tags": ["Notices"],
         "description": "get notices by id",

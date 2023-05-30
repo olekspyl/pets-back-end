@@ -1,7 +1,8 @@
 {
-  "name": "template",
+  "name": "pets-back-end",
   "version": "0.0.0",
   "private": true,
+  "contributors": ["https://github.com/olekspyl", "https://github.com/Mykola0502", "https://github.com/Galinaddd", "https://github.com/RossHaluz", "https://github.com/NatalieFalach"],
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",

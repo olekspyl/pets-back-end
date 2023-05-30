@@ -2,9 +2,9 @@ const { Notice } = require("../../models/notice");
 const { HttpError } = require("../../utils");
 
 const getNoticeById = async (req, res) => {
-  const { noticeId } = req.params;
+  const { id } = req.params;
 
-  const notice = await Notice.findById({ _id: noticeId }, "-__v").populate(
+  const notice = await Notice.findById({ _id: id }, "-__v").populate(
     "owner",
     "name email phone city"
   );
