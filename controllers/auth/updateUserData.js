@@ -23,7 +23,12 @@ const updateUserData = async (req, res) => {
     throw HttpError(404, "Not found");
   }
 
-  res.json(result);
+  const updatedUserObject = result.toObject();
+  delete updatedUserObject.password;
+
+  res.json(updatedUserObject);
+
+  // res.json(result);
 };
 
 module.exports = updateUserData;
