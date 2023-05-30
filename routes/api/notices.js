@@ -1,8 +1,9 @@
 const express = require("express");
 const { validateBody, checkAuth, uploadCloud } = require("../../middlewars");
 const { schemas } = require("../../models/notice");
-const router = express.Router();
 const ctrl = require("../../controllers/notices");
+
+const router = express.Router();
 
 // створити ендпоінт для пошуку оголошеннь по заголовку
 router.get("/", ctrl.getNoticeByName);
@@ -17,12 +18,7 @@ router.get("/favorite", checkAuth, ctrl.getUserFavNotices);
 router.get("/user", checkAuth, ctrl.getOwnerAllNotices);
 
 // створити ендпоінт для додавання оголошення до обраних
-router.patch(
-  "/favorite/:noticeId",
-  checkAuth,
-  //   validateBody(schemas.updatePetToFavoriteSchema),
-  ctrl.addToFavorite
-);
+router.patch("/favorite/:noticeId", checkAuth, ctrl.addToFavorite);
 
 // створити ендпоінт для додавання оголошень відповідно до обраної категорії
 router.post(

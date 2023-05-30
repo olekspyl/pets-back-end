@@ -213,8 +213,29 @@
     "/notices/": {
       "get": {
         "tags": ["Notices"],
-        "description": "get notices by title",
-        "parameters": [],
+        "description": "get notices by name",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": true
+          }
+        ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": false
@@ -292,7 +313,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "noticeId",
+            "name": "id",
             "required": true,
             "description": "id of notice"
           }
@@ -328,6 +349,18 @@
       "get": {
         "tags": ["Notices"],
         "description": "find by title notices among favorite",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": true
+          }
+        ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "required": false

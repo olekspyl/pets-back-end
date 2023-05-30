@@ -3,9 +3,7 @@ const { paginate } = require("../../utils");
 
 const getUserFavNotices = async (req, res) => {
   const { id: owner } = req.userId;
-
   const { page: processedPage, limit: processedLimit } = req.query;
-
   const { page, limit, skip } = paginate(processedPage, processedLimit);
 
   const totalNotices = await Notice.find({
