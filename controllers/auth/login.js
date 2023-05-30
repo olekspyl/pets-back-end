@@ -31,6 +31,9 @@ const login = async (req, res) => {
       city: user._doc.city,
       avatarURL: user._doc.avatarURL,
       token,
+      name: user._doc.name,
+      birthday: user._doc.birthday,
+      phone: user._doc.phone,
     },
   });
 };
